@@ -1,10 +1,10 @@
--- Data Engineering
-DROP TABLE employees;
-DROP TABLE departments;
-DROP TABLE dept_emp;
-DROP TABLE dept_manager;
-DROP TABLE salaries;
-DROP TABLE titles;
+-- DATA ENGINEERING
+-- DROP TABLE employees;
+-- DROP TABLE departments;
+-- DROP TABLE dept_emp;
+-- DROP TABLE dept_manager;
+-- DROP TABLE salaries;
+-- DROP TABLE titles;
 
 CREATE TABLE employees (
   	emp_no INT NOT NULL,
@@ -71,9 +71,17 @@ INNER JOIN salaries
 ON employees.emp_no = salaries.emp_no;
 
 -- 2. List first name, last name, and hire date for employees who were hired in 1986.
-
+SELECT employees.first_name, employees.last_name, employees.hire_date
+FROM employees
+WHERE hire_date between '1986-01-01' and '1986-12-31';
 
 -- 3. List the manager of each department with the following information: department number, department name, the manager's employee number, last name, first name.
+SELECT dept_manager.dept_no, departments.dept_name, dept_manager.emp_no, employees.last_name, employees.first_name
+FROM dept_manager
+INNER JOIN employees
+ON dept_manager.emp_no = employees.emp_no 
+INNER JOIN departments
+ON dept_manager.dept_no = departments.dept_no;
 
 
 -- 4. List the department of each employee with the following information: employee number, last name, first name, and department name.
