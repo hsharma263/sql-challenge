@@ -1,8 +1,8 @@
 -- DATA ANALYSIS
 -- 1. List the following details of each employee: employee number, last name, first name, sex, and salary.
 SELECT employees.emp_no, employees.last_name, employees.first_name, employees.sex, salaries.salary
-FROM employees
-INNER JOIN salaries 
+FROM employees 
+LEFT JOIN salaries 
 ON employees.emp_no = salaries.emp_no;
 
 -- 2. List first name, last name, and hire date for employees who were hired in 1986.
@@ -48,11 +48,10 @@ INNER JOIN employees
 ON dept_emp.emp_no = employees.emp_no
 INNER JOIN departments
 ON dept_emp.dept_no = departments.dept_no
-WHERE departments.dept_name = 'Development' OR departments.dept_name= 'Sales';
+WHERE departments.dept_name IN ('Development', 'Sales');
 
 -- 8. In descending order, list the frequency count of employee last names, i.e., how many employees share each last name.
 SELECT last_name, COUNT(last_name) AS "Surname Count"
 FROM employees
 GROUP BY last_name
 ORDER BY "Surname Count" DESC;
-
